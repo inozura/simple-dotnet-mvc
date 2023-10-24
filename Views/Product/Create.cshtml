@@ -1,0 +1,51 @@
+@*System.Globalization.CultureInfo.CurrentUICulture*@
+@model assessment_kelvin.ViewModel.ProductViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="d-flex flex-row justify-content-between align-items-center mt-2 mt-md-1">
+  <h2>Create Product</h2>
+  <a asp-action="Index" class="btn btn-primary">Back to List</a>
+</div>
+
+<div class="row">
+    <div class="d-flex flex-row justify-content-center align-items-center mt-5">
+        <div data-aos="fade-in" class="card p-3 p-md-5">
+          <div class="card-body">
+            <form enctype="multipart/form-data" asp-controller="Product" method="post" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group mb-3">
+                    <label asp-for="ImageFile" class="control-label"></label>
+                    <input asp-for="ImageFile" class="form-control" accept="image/png, image/jpg, image/jpeg" />
+                    <span asp-validation-for="ImageFile" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-3">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group mb-2">
+                    <label asp-for="Price" class="control-label"></label>
+                    <input asp-for="Price" class="form-control" type="number" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script src="~/js/custom-validation.js"></script>
+}

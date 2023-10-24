@@ -1,0 +1,48 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.card {
+  border: unset !important;
+  border-radius: 20px !important;
+  box-shadow: 0 14px 30px rgba(103,132,187,.15), 0 4px 4px rgba(103,132,187,.05);
+  transition: .5s ease-in-out;
+
+}
+
+.card-product:hover {
+  transform: scale(1.05);
+}
+
+.archiveText {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.navbar {
+  border-radius: 0 0 10px 10px;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.radius-20px {
+  border-radius: 20px !important;
+}

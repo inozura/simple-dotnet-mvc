@@ -1,0 +1,133 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div>
+    <div class="text-center">
+        <h1 class="display-4" id="cek">Welcome</h1>
+        <p class="mb-5">These are some of the products we offer</p>
+    </div>
+
+    @* Skeleton list card animation *@
+    <div id="skelton-card" class="row">
+        @for (var i = 0; i < 8; i++)
+        {
+            <div class="col-md-4 col-lg-3 mb-5">
+                <div class="card">
+                    <svg class="bd-placeholder-img card-img-top" width="100%" height="180"
+                        xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap"
+                        preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <title>Placeholder</title>
+                        <rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6"
+                            dy=".3em"></text>
+                    </svg>
+                    <div class="card-body">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
+                            card's content.</p>
+                        <a href="#" class="">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @* List grid card *@
+    <div id="card-grid" class="row"></div>
+
+    @* Modal detail *@
+    <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document" onclick="">
+        <div class="modal-content radius-20px">
+            <div class="modal-body p-4">
+                <!-- Content for the modal body -->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+        // Global variabel
+        let listData;
+
+        $(document).ready(() => {
+            // Show loading skeleton
+            $('#skelton-card').scheletrone();
+
+            // To delay skeleton animation
+            setTimeout(() => {
+                $.ajax({
+                    url: '/product/List',
+                    type: 'GET',
+                    dataType: 'json',
+                    success: function (data) {
+                        // Hide loading skeleton
+                        $('#skelton-card').scheletrone('stopLoader');
+
+                        // Check data is not empty
+                        if (data.length > 0) {
+                            // Store to global variabel
+                            listData = data;
+
+                            // Display the data as a card grid
+                            displayCardGrid(data);
+                        } else {
+                            const cardGrid = $('#card-grid');
+
+                            cardGrid.append('<h2 class="text-center">Product is Empty</h2>')
+                        }
+                    },
+                    error: function (error) {
+                        // Handle errors
+                        console.log('Error:', error);
+                    }
+                });
+            }, 1500);
+        });
+        
+        const handleClickShowModal = (index) => {
+            const modal = $('#productModal');
+            modal.find('.modal-body').html(`
+                <img src="${listData[index].image}" alt="${listData[index].name}" class="card-img-top radius-20px mb-5">
+                <h5>${listData[index].name}</h5>
+                <p class="mb-0">${listData[index].description}</p>
+                <p class="mb-0">$${listData[index].price}</p>
+            `);
+        }
+
+        const displayCardGrid = (data) => {
+            // Select the card grid container
+            const cardGrid = $('#card-grid');
+
+            // Iterate over the JSON data and create a card for each item
+            data.forEach((item, index) => {
+                const card = `
+                        <div 
+                            data-aos="fade-up" 
+                            data-aos-delay="${index * 50}" 
+                            class="col-md-4 col-lg-3 mb-5 show-details p-3"
+                        >
+                            <div 
+                                id="card-product"
+                                data-bs-toggle="modal" 
+                                data-product-index="${index}"
+                                data-bs-target="#productModal"
+                                class="card card-product overflow-hidden cursor-pointer"
+                                onclick="handleClickShowModal(${index})"
+                            >
+                                <img src="${item.image}" alt="${item.name}" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 class="fs-5">${item.name}</h5>
+                                    <p>${item.description}</p>
+                                    <p>Price: $${item.price}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                cardGrid.append(card);
+            });
+        }
+    </script>
+}
