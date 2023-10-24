@@ -46,5 +46,7 @@
   Run the app with running this command
 
 ```bash
-  dotnet watch
+  dotnet build
+  then
+  dotnet run
 ```
