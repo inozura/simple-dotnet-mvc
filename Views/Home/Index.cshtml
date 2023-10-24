@@ -114,13 +114,13 @@
                                 data-bs-toggle="modal" 
                                 data-product-index="${index}"
                                 data-bs-target="#productModal"
-                                class="card card-product overflow-hidden cursor-pointer"
                                 onclick="handleClickShowModal(${index})"
+                                class="card card-product overflow-hidden cursor-pointer"
                             >
                                 <img src="${item.image}" alt="${item.name}" class="card-img-top">
                                 <div class="card-body">
                                     <h5 class="fs-5">${item.name}</h5>
-                                    <p>${item.description}</p>
+                                    <p class="archiveText">${item.description}</p>
                                     <p>Price: $${item.price}</p>
                                 </div>
                             </div>

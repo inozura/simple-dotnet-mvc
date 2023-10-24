@@ -29,7 +29,7 @@ public class ProductController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(ProductViewModel model)
+    public IActionResult Create(ProductViewModel model)
     {
         if (ModelState.IsValid)
         {
@@ -66,6 +66,7 @@ public class ProductController : Controller
             catch (System.Exception ex)
             {
                 // Handle the exception
+                Console.WriteLine(ex);
                 ModelState.AddModelError(string.Empty, "An error occurred while saving the product.");
                 return View(model);
             }

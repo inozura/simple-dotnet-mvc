@@ -16,5 +16,5 @@ public class ProductViewModel
     [Display(Name = "ImageFile")]
     [DataType(DataType.Upload)]
     [Required(ErrorMessage = "Please select an image")]
-    public IFormFile ImageFile { get; set; }
+    public IFormFile? ImageFile { get; set; }
 }
