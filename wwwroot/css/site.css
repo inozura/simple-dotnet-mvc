@@ -17,6 +17,14 @@ body {
   margin-bottom: 60px;
 }
 
+.td-description {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 600px;
+  display: inline-block;
+}
+
 .card {
   border: unset !important;
   border-radius: 20px !important;
@@ -26,7 +34,8 @@ body {
 }
 
 .card-product:hover {
-  transform: scale(1.05);
+  transform: scale(1.01);
+  box-shadow: 0 20px 30px rgba(103,132,187,.30), 0 10px 10px rgba(103,132,187,.05) !important;
 }
 
 .archiveText {

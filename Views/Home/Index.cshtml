@@ -31,13 +31,12 @@
             </div>
         }
     </div>
-
     @* List grid card *@
     <div id="card-grid" class="row"></div>
 
     @* Modal detail *@
     <div class="modal fade" id="productModal" tabindex="-1" role="dialog" aria-labelledby="productModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document" onclick="">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg modal-dialog-centered" role="document" onclick="">
         <div class="modal-content radius-20px">
             <div class="modal-body p-4">
                 <!-- Content for the modal body -->
@@ -90,10 +89,18 @@
         const handleClickShowModal = (index) => {
             const modal = $('#productModal');
             modal.find('.modal-body').html(`
-                <img src="${listData[index].image}" alt="${listData[index].name}" class="card-img-top radius-20px mb-5">
-                <h5>${listData[index].name}</h5>
-                <p class="mb-0">${listData[index].description}</p>
-                <p class="mb-0">$${listData[index].price}</p>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="d-flex h-100 justify-content-center align-items-center">
+                            <img src="${listData[index].image}" alt="${listData[index].name}" class="card-img-top radius-20px mb-5">
+                        </div>
+                    </div>
+                    <div class="col-md-7 ps-md-3 py-4">
+                        <h3 class="mb-1">${listData[index].name}</h3>
+                        <p class="mb-0 fw-bolder fs-5 mb-3">$${listData[index].price}</p>
+                        <p class="mb-0">${listData[index].description}</p>
+                    </div>
+                </div>
             `);
         }
 
