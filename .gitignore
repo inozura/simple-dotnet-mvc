@@ -1,3 +1,6 @@
 # Ignore build output directories
 bin/
 obj/
+
+# Image uploaded
+wwwroot/images/*
